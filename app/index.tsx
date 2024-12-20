@@ -19,10 +19,10 @@ const Index = () => {
       >
         <SafeAreaView className="flex-1 px-1 justify-between ">
           <View className="flex-1 justify-center items-center">
-            <Text className="text-center text-white font-bold text-4xl">
-              Swipe Scape
+            <Text className="text-center text-violet-500 font-extrabold text-7xl font-poppins">
+              Swipe Scape.
             </Text>
-            <Text className="text-center text-white text-2xl">
+            <Text className="text-center text-purple-700 text-2xl font-poppins">
               Transform your screen, one swipe at a time!
             </Text>
           </View>
