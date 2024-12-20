@@ -2,10 +2,14 @@ import { View, Text } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
+import TabBar from "@/components/TabBar";
 
 const TabsLayout = () => {
   return (
-    <Tabs screenOptions={{ headerShown: false }}>
+    <Tabs
+      screenOptions={{ headerShown: false }}
+      tabBar={(props) => <TabBar {...props} />}
+    >
       <Tabs.Screen
         name="home"
         options={{

@@ -12,7 +12,11 @@ const Index = () => {
   const router = useRouter();
   return (
     <View className="flex-1">
-      <ImageBackground source={IndexBg} resizeMode="cover" className="flex-1">
+      <ImageBackground
+        source={IndexBg}
+        resizeMode="cover"
+        className="flex-1 overflow-hidden"
+      >
         <SafeAreaView className="flex-1 px-1 justify-between ">
           <View className="flex-1 justify-center items-center">
             <Text className="text-center text-white font-bold text-4xl">
