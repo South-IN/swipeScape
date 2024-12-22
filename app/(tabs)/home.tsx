@@ -1,22 +1,47 @@
-import { View, Text } from "react-native";
-import React, { useEffect, useState } from "react";
+import { View, Text, TextInput, Pressable, Alert } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
 import { fetchWallpapers } from "@/utils/wallpaperUtils";
-import { Photo, Photos, PhotosWithTotalResults } from "pexels";
+import { Photo } from "pexels";
 import WallPaperTray from "@/components/WallPaperTray";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Home = () => {
   const [wallpapers, setWallpapers] = useState<Photo[]>([]);
+  const inputRef = useRef<TextInput>(null);
   useEffect(() => {
     const getWallpapers = async () => {
-      const data = await fetchWallpapers();
+      const data = await fetchWallpapers("wallpaper");
       setWallpapers(data.photos);
     };
     getWallpapers();
   }, []);
+  const handleSearch = async () => {
+    const searchQuery = inputRef.current?.value || "";
+    if (searchQuery == "") {
+      Alert.alert("Error!", "Input Field for search is empty", [
+        { text: "OK" },
+      ]);
+      return;
+    }
+    const data = await fetchWallpapers(searchQuery);
+    setWallpapers(data.photos);
+  };
   return (
     <SafeAreaView className="flex-1">
-      <Text>Home</Text>
+      <View className="flex justify-center items-center h-20 w-full flex-row my-3 p-4">
+        <TextInput
+          ref={inputRef}
+          className="flex-1 h-10 p-1 text-purple-900 font-poppins"
+          placeholder="Search"
+          placeholderTextColor={"purple"}
+          returnKeyType="search"
+          onSubmitEditing={handleSearch}
+        />
+        <Pressable onPress={handleSearch}>
+          <Ionicons name="search-circle-outline" size={44} color="purple" />
+        </Pressable>
+      </View>
       <View style={{ height: "100%", width: "100%" }}>
         <WallPaperTray wallpapers={wallpapers} />
       </View>

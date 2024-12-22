@@ -9,8 +9,7 @@ const API_KEY = process.env.EXPO_PUBLIC_API_KEY
   : "";
 const client = createClient(API_KEY);
 
-export const fetchWallpapers = async (): Promise<Photos> => {
-  const query = "wallpaper";
+export const fetchWallpapers = async (query: string): Promise<Photos> => {
   const data = await client.photos.search({ query, per_page: 80 });
   if ("photos" in data) {
     return data;

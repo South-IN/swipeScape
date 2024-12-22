@@ -55,31 +55,6 @@ const TabBar = ({ state, descriptors, navigation }) => {
             label={label}
           />
         );
-
-        // return (
-        //   <TouchableOpacity
-        //     accessibilityRole="button"
-        //     accessibilityState={isFocused ? { selected: true } : {}}
-        //     accessibilityLabel={options.tabBarAccessibilityLabel}
-        //     testID={options.tabBarButtonTestID}
-        //     onPress={onPress}
-        //     onLongPress={onLongPress}
-        //     style={{ flex: 1 }}
-        //     className="items-center justify-center gap-1"
-        //   >
-        //     {Icons[route.name]({
-        //       color: isFocused ? primaryColor : secondaryColor,
-        //     })}
-
-        //     <Text
-        //       style={{
-        //         color: isFocused ? primaryColor : secondaryColor,
-        //       }}
-        //     >
-        //       {label}
-        //     </Text>
-        //   </TouchableOpacity>
-        // );
       })}
     </View>
   );

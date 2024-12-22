@@ -1,6 +1,5 @@
-//@ts-nocheck
 import { View, Text, Pressable } from "react-native";
-import { Image } from "expo-image";
+import { Image, ImageStyle } from "expo-image";
 import React from "react";
 import { Photo } from "pexels";
 import { MasonryFlashList } from "@shopify/flash-list";
@@ -10,7 +9,7 @@ interface WallpaperProps {
 }
 
 const WallPaperTray: React.FC<WallpaperProps> = ({ wallpapers }) => {
-  const getImageHeight = (item) => {
+  const getImageHeight = (item: Photo) => {
     let { height, width } = item;
     return { height: getImageSize(height, width) };
   };

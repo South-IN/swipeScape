@@ -43,6 +43,7 @@ const TabBarButton = (props: TabBarButtonProps) => {
         })}
       </Animated.View>
       <Text
+        className="font-poppins"
         style={{
           color,
         }}
