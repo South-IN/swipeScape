@@ -1,25 +1,38 @@
-import { View, Text, Image, Pressable } from "react-native";
+//@ts-nocheck
+import { View, Text, Pressable } from "react-native";
+import { Image } from "expo-image";
 import React from "react";
 import { Photo } from "pexels";
 import { MasonryFlashList } from "@shopify/flash-list";
+import { getImageSize } from "@/utils/wallpaperUtils";
 interface WallpaperProps {
   wallpapers: Photo[];
 }
 
 const WallPaperTray: React.FC<WallpaperProps> = ({ wallpapers }) => {
+  const getImageHeight = (item) => {
+    let { height, width } = item;
+    return { height: getImageSize(height, width) };
+  };
   return (
-    <View className="">
+    <View className="flex-1">
       <MasonryFlashList
-        className=""
         data={wallpapers}
-        numColumns={2}
+        numColumns={3}
         estimatedItemSize={200}
+        contentContainerStyle={{ padding: 10 }}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <Pressable>
+          <Pressable
+            className="m-1 rounded-xl overflow-hidden"
+            onPress={() => console.log("press")}
+          >
             <Image
-              source={{ uri: item.src.medium }}
-              className="h-60 w-full rounded-lg"
-              resizeMode="cover"
+              source={item.src.large}
+              style={getImageHeight(item)}
+              transition={300}
+              className="rounded-xl"
+              contentFit="cover"
             />
           </Pressable>
         )}
