@@ -29,7 +29,7 @@ const WallPaperTray: React.FC<WallpaperProps> = ({ wallpapers }) => {
             <Image
               source={item.src.large}
               style={getImageHeight(item)}
-              transition={300}
+              transition={100}
               className="rounded-xl"
               contentFit="cover"
             />
