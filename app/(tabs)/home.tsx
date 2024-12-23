@@ -19,6 +19,7 @@ const Home = () => {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [wallpapers, setWallpapers] = useState<Photo[]>([]);
   const inputRef = useRef<TextInput>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
   useEffect(() => {
     const getWallpapers = async () => {
       const data = await fetchWallpapers("wallpaper");
@@ -27,8 +28,7 @@ const Home = () => {
     getWallpapers();
   }, []);
   const handleSearch = async () => {
-    const searchQuery = inputRef.current?.value || "";
-    if (searchQuery == "") {
+    if (searchQuery === "") {
       Alert.alert("Error!", "Input Field for search is empty", [
         { text: "OK" },
       ]);
@@ -48,7 +48,8 @@ const Home = () => {
     <SafeAreaView className="flex-1">
       <View className="flex justify-center items-center h-20 w-full rounded-full flex-row my-3 p-4 bg-gray-200">
         <TextInput
-          ref={inputRef}
+          value={searchQuery}
+          onChangeText={setSearchQuery}
           className="flex-1 h-10 p-1 text-purple-900 font-poppins"
           placeholder="Search"
           placeholderTextColor={"purple"}
