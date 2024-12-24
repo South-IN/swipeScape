@@ -4,11 +4,13 @@ import React from "react";
 import { Photo } from "pexels";
 import { MasonryFlashList } from "@shopify/flash-list";
 import { getImageSize } from "@/utils/wallpaperUtils";
+import { Router } from "expo-router";
 interface WallpaperProps {
   wallpapers: Photo[];
+  router: Router;
 }
 
-const WallPaperTray: React.FC<WallpaperProps> = ({ wallpapers }) => {
+const WallPaperTray: React.FC<WallpaperProps> = ({ wallpapers, router }) => {
   const getImageHeight = (item: Photo) => {
     let { height, width } = item;
     return { height: getImageSize(height, width) };
@@ -24,7 +26,12 @@ const WallPaperTray: React.FC<WallpaperProps> = ({ wallpapers }) => {
         renderItem={({ item }) => (
           <Pressable
             className="m-1 rounded-xl overflow-hidden"
-            onPress={() => console.log("press")}
+            onPress={() =>
+              router.push({
+                pathname: "/image",
+                params: { ...item, ...item["src"] },
+              })
+            }
           >
             <Image
               source={item.src.large}

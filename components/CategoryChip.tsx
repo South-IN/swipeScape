@@ -1,4 +1,4 @@
-import { Text, Pressable, StyleSheet } from "react-native";
+import { Text, Pressable } from "react-native";
 import React, { useEffect } from "react";
 import Animated, {
   useAnimatedStyle,
@@ -45,9 +45,3 @@ const CategoryChip: React.FC<CategoryChipProps> = ({
 };
 
 export default CategoryChip;
-
-const styles = StyleSheet.create({
-  activeChipText: {
-    color: "white",
-  },
-});

@@ -5,8 +5,9 @@ import {
   Pressable,
   Alert,
   FlatList,
+  ToastAndroid,
 } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchWallpapers } from "@/utils/wallpaperUtils";
 import { Photo } from "pexels";
 import WallPaperTray from "@/components/WallPaperTray";
@@ -14,12 +15,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { WALLPAPER_CATEGORIES } from "@/constants/WallPaperCategories";
 import CategoryChip from "@/components/CategoryChip";
+import { useRouter } from "expo-router";
 
 const Home = () => {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [wallpapers, setWallpapers] = useState<Photo[]>([]);
-  const inputRef = useRef<TextInput>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const router = useRouter();
   useEffect(() => {
     const getWallpapers = async () => {
       const data = await fetchWallpapers("wallpaper");
@@ -29,16 +31,13 @@ const Home = () => {
   }, []);
   const handleSearch = async () => {
     if (searchQuery === "") {
-      Alert.alert("Error!", "Input Field for search is empty", [
-        { text: "OK" },
-      ]);
+      ToastAndroid.show("Search Input is Empty", ToastAndroid.SHORT);
       return;
     }
     const data = await fetchWallpapers(searchQuery);
     setWallpapers(data.photos);
   };
   const onCategoryChange = async (item: string) => {
-    console.log(item);
     const query = item === "All" ? "wallpaper" : item;
     setActiveCategory(item);
     const data = await fetchWallpapers(query);
@@ -77,7 +76,7 @@ const Home = () => {
         />
       </View>
       <View style={{ height: "100%", width: "100%" }}>
-        <WallPaperTray wallpapers={wallpapers} />
+        <WallPaperTray wallpapers={wallpapers} router={router} />
       </View>
     </SafeAreaView>
   );
